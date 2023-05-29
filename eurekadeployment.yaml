@@ -30,4 +30,6 @@ spec:
     - name: eureka-server
       port: 8671
       targetPort: 8671
+  type: NodePort    
+   
 

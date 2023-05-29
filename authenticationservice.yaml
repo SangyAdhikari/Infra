@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: authentication-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: authentication-service
+  template:
+    metadata:
+      labels:
+        app: authentication-service
+    spec:
+      containers:
+        - name: authentication-service
+          image: sangy1995/evento-master-authentication-service:v1
+
+          ports:
+            - containerPort: 8082
+          # Add other container configuration, environment variables, etc. as needed
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: authentication-service
+spec:
+  selector:
+    app: authentication-service
+  ports:
+    - name: http
+      port: 8082
+      targetPort: 8082
+  
+

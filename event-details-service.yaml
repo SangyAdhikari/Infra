@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: event-details-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: event-details-service
+  template:
+    metadata:
+      labels:
+        app: event-details-service
+    spec:
+      containers:
+        - name: event-details-service
+          image: sangy1995/evento-master-event-details-service:v1
+
+          ports:
+            - containerPort: 8090
+          # Add other container configuration, environment variables, etc. as needed
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: event-details-service
+spec:
+  selector:
+    app: event-details-service
+  ports:
+    - name: http
+      port: 8090
+      targetPort: 8090
+  # Add other service configuration as needed
+

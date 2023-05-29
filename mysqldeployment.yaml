@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysqldeployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mysql
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      containers:
+        - name: mysql-container
+          image: sangy1995/mysql:v1
+
+          ports:
+            - containerPort: 3306
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: "Gangs@2000"
+            - name: MYSQL_PASSWORD
+              value: "Gangs@2000"
+            - name: MYSQL_ALLOW_EMPTY_PASSWORD
+              value: "yes"
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql-service
+spec:
+  type: NodePort
+  selector:
+    app: mysql
+  ports:
+    - name: mysql-port
+      port: 3306
+      targetPort: 3306
+
+

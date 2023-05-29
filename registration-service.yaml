@@ -31,5 +31,6 @@ spec:
     - name: http
       port: 8086
       targetPort: 8086
+  type: NodePort    
   # Add other service configuration as needed
 
